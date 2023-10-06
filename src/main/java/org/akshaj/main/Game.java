@@ -1,4 +1,4 @@
-package org.akshaj;
+package org.akshaj.main;
 
 public class Game implements Runnable{
 

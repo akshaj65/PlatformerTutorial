@@ -34,5 +34,8 @@ build/
 ### VS Code ###
 .vscode/
 
+### remove unused file
+src/main/resources/unused-assets/
+
 ### Mac OS ###
 .DS_Store

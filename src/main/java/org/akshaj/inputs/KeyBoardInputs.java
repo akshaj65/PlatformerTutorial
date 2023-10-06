@@ -1,6 +1,7 @@
 package org.akshaj.inputs;
 
-import org.akshaj.GamePanel;
+
+import org.akshaj.main.GamePanel;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
