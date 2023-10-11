@@ -22,17 +22,20 @@ public class KeyBoardInputs implements KeyListener {
     @Override
     public void keyPressed(KeyEvent keyEvent) {
        switch (keyEvent.getKeyCode()){
-           case KeyEvent.VK_W -> gamePanel.setDirection(Directions.UP);
-           case KeyEvent.VK_A -> gamePanel.setDirection(Directions.LEFT);
-           case KeyEvent.VK_S -> gamePanel.setDirection(Directions.DOWN);
-           case KeyEvent.VK_D -> gamePanel.setDirection(Directions.RIGHT);
+           case KeyEvent.VK_W -> gamePanel.getGame().getPlayer().setUp(true);
+           case KeyEvent.VK_A -> gamePanel.getGame().getPlayer().setLeft(true);
+           case  KeyEvent.VK_D -> gamePanel.getGame().getPlayer().setRight(true);
+           case   KeyEvent.VK_S -> gamePanel.getGame().getPlayer().setDown(true);
        }
     }
 
     @Override
     public void keyReleased(KeyEvent keyEvent) {
         switch (keyEvent.getKeyCode()){
-            case KeyEvent.VK_W, KeyEvent.VK_A, KeyEvent.VK_D, KeyEvent.VK_S -> gamePanel.setMoving(false);
+            case KeyEvent.VK_W -> gamePanel.getGame().getPlayer().setUp(false);
+            case KeyEvent.VK_A ->gamePanel.getGame().getPlayer().setLeft(false);
+            case  KeyEvent.VK_D -> gamePanel.getGame().getPlayer().setRight(false);
+            case   KeyEvent.VK_S -> gamePanel.getGame().getPlayer().setDown(false);
         }
     }
 }
