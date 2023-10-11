@@ -77,12 +77,13 @@ public class GamePanel extends JPanel {
         this.moving=moving;
     }
 
-    public void paintComponent(Graphics g){
-        super.paintComponent(g);
-        updateAnimationTick();
-
+    public void updateGame() {
+        updateAnimationTick(); //we have shifted all these three from paintComponent
         setAnimation();
         updatePos();
+    }
+    public void paintComponent(Graphics g){
+        super.paintComponent(g);
 
         g.drawImage(animations[playerAction][aniIndex],(int)xDelta,(int)yDelta,128+128,80+80,null);
 
@@ -92,16 +93,16 @@ public class GamePanel extends JPanel {
         if(moving){
             switch (playerDir){
                 case Directions.LEFT:
-                    xDelta-=5;
+                    xDelta-=1;
                     break;
                  case Directions.DOWN:
-                     yDelta+=5;
+                     yDelta+=1;
                      break;
                  case Directions.UP:
-                     yDelta-=5;
+                     yDelta-=1;
                      break;
                  case Directions.RIGHT:
-                     xDelta+=5;
+                     xDelta+=1;
                      break;
             }
         }
@@ -124,7 +125,6 @@ public class GamePanel extends JPanel {
 
         }
     }
-
 
 
 
