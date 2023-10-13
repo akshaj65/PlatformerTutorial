@@ -1,6 +1,7 @@
 package org.akshaj.entities;
 
 import org.akshaj.utils.Constants;
+import org.akshaj.utils.LoadSave;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -17,8 +18,9 @@ public class Player extends Entity{
     private boolean left,right,up,down;
     private float playerSpeed =2.0f;
     private boolean moving=false,attacking=false;
-    public Player(float x,float y){
-        super(x,y);
+
+    public Player(float x,float y,int width,int height){
+        super(x,y,width,height);
         loadAnimations();
     }
 
@@ -47,7 +49,7 @@ public class Player extends Entity{
     }
 
     public void render(Graphics g){
-        g.drawImage(animations[playerAction][aniIndex],(int)x,(int)y,128+128,80+80,null);
+        g.drawImage(animations[playerAction][aniIndex],(int)x,(int)y,width,height,null);
 
     }
 
@@ -89,9 +91,7 @@ public class Player extends Entity{
 
     private void loadAnimations() {
 
-        InputStream is = getClass().getResourceAsStream("/active-assets/player_sprites.png");
-        try {
-            BufferedImage bufferedImage= ImageIO.read(is);
+            BufferedImage bufferedImage= LoadSave.getSpriteAtlas(LoadSave.PLAYER_ATLAS);
             animations = new BufferedImage[9][6];
 
             for (int i = 0; i < animations.length; i++) {
@@ -99,15 +99,6 @@ public class Player extends Entity{
                     animations[i][j] = bufferedImage.getSubimage((j * 64), (i * 40), 64, 40);
                 }
             }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }finally {
-            try {
-                is.close();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        }
     }
 
     public boolean isLeft() {

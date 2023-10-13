@@ -12,6 +12,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.security.PublicKey;
 
+import static org.akshaj.main.Game.GAME_WIDTH;
+import static org.akshaj.main.Game.GAME_HEIGHT;
 import static org.akshaj.utils.Constants.PlayerConstants.*;
 
 public class GamePanel extends JPanel {
@@ -31,7 +33,8 @@ public class GamePanel extends JPanel {
 
 
     private void setPanelSize() {
-        Dimension size = new Dimension(1280,800);  //image size is 32px  1280/32 = 40 image wide    800/32 =25 image in height
+        Dimension size = new Dimension(GAME_WIDTH,GAME_HEIGHT);  //image size is 32px  1280/32 = 40 image wide    800/32 =25 image in height
+        System.out.println(GAME_WIDTH+" "+Game.GAME_HEIGHT);
         setMinimumSize(size);
         setPreferredSize(size);
         setMaximumSize(size);
