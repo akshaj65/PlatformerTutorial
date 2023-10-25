@@ -1,6 +1,8 @@
 package org.akshaj.entities;
 
+import org.akshaj.main.Game;
 import org.akshaj.utils.Constants;
+import static  org.akshaj.utils.HelperMethods.*;
 import org.akshaj.utils.LoadSave;
 
 import javax.imageio.ImageIO;
@@ -18,39 +20,55 @@ public class Player extends Entity{
     private boolean left,right,up,down;
     private float playerSpeed =2.0f;
     private boolean moving=false,attacking=false;
+    private int[][] lvlData;
+    private float xDrawOffset = 21 * Game.SCALE;  //21 and 4 are the points of the top left edge of the player sprite
+                                                 // can check in gimp for pointer
+    private float yDrawOffset = 4 * Game.SCALE;
 
     public Player(float x,float y,int width,int height){
         super(x,y,width,height);
         loadAnimations();
+        initHitbox(x,y,20 * Game.SCALE,28 * Game.SCALE);  //20 and 28 is the width amd height of the player_sprite sub image
     }
 
     public void update(){
+        updatePos();
+//        updateHitbox();
         updateAnimationTick();
         setAnimation();
-        updatePos();
     }
 
     private void updatePos() {
         moving=false;
-        if(left && !right){
-            moving=true;
-            x-=playerSpeed;
-        }else if(right &&!left){
-            moving=true;
-            x+=playerSpeed;
+        if(!left&&!right&&!up&&!down){
+            return;
         }
-        if (up && !down) {
-            moving=true;
-            y-=playerSpeed;
-        } else if (down && !up) {
-            moving=true;
-            y+=playerSpeed;
-        }
+        float xSpeed =0, ySpeed =0;
+        if(left && !right)
+            xSpeed=-playerSpeed;
+        else if(right &&!left )
+            xSpeed=playerSpeed;
+        if (up && !down)
+            ySpeed=-playerSpeed;
+         else if (down && !up)
+            ySpeed=playerSpeed;
+
+//         if (canMoveHere(x+xSpeed,y+ySpeed,width,height,lvlData)){
+//             this.x+=xSpeed;
+//             this.y+=ySpeed;
+//             moving=true;
+//         }
+        if (canMoveHere(hitbox.x+xSpeed,hitbox.y+ySpeed, hitbox.width, hitbox.height, lvlData)){
+             this.hitbox.x+=xSpeed;
+             this.hitbox.y+=ySpeed;
+             moving=true;
+         }
     }
 
     public void render(Graphics g){
-        g.drawImage(animations[playerAction][aniIndex],(int)x,(int)y,width,height,null);
-
+//        g.drawImage(animations[playerAction][aniIndex],(int)x,(int)y,width,height,null);
+        g.drawImage(animations[playerAction][aniIndex],(int)(hitbox.x - xDrawOffset),(int)(hitbox.y -yDrawOffset),width,height,null);
+        drawHitbox(g);
     }
 
 
@@ -101,6 +119,9 @@ public class Player extends Entity{
             }
     }
 
+    public  void loadLevelData(int[][] lvlData){
+        this.lvlData=lvlData;
+    }
     public boolean isLeft() {
         return left;
     }
