@@ -1,5 +1,7 @@
 package org.akshaj.inputs;
 
+import org.akshaj.entities.Player;
+import org.akshaj.gamestates.Gamestate;
 import org.akshaj.main.GamePanel;
 
 import java.awt.event.MouseEvent;
@@ -16,10 +18,15 @@ public class MouseInputs implements MouseListener, MouseMotionListener {
 
     @Override
     public void mouseClicked(MouseEvent mouseEvent) {
-        if(mouseEvent.getButton()==MouseEvent.BUTTON1){
-            gamePanel.getGame().getPlayer().setAttacking(true);
+        switch (Gamestate.state){
+
+            case PLAYING -> {
+                gamePanel.getGame().getPlaying().mouseClicked(mouseEvent);
+            }
+            case MENU -> {
+                gamePanel.getGame().getMenu().mouseClicked(mouseEvent);
+            }
         }
-//        System.out.println("mouse clicked");
     }
 
     @Override

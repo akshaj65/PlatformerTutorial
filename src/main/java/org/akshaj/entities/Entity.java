@@ -16,24 +16,13 @@ public abstract class Entity {
         this.height=height;
 //        initHitbox();
     }
-//    protected void  updateHitbox(){
-//        hitbox.x=(int) x;
-//        hitbox.y=(int) y;
-//    }
     protected  void drawHitbox(Graphics g){
-        //for debuging hitbox
-        g.setColor(Color.green);
-//        g.drawRect((int) x,(int) y,width,height);
-        g.drawRect((int) hitbox.x,(int) hitbox.y,(int) hitbox.width,(int) hitbox.height);
+        //for debugging hitbox
+        //   g.setColor(Color.green);
+        //   g.drawRect((int) hitbox.x,(int) hitbox.y,(int) hitbox.width,(int) hitbox.height);
     }
     protected void initHitbox(float x, float y,float width,float height) {
         hitbox=new Rectangle2D.Float((int) x,(int) y,width,height);
     }
-
-//    private void initHitbox() {
-//        hitbox=new Rectangle((int) x,(int) y,width,height);
-//    }
-
-
 
 }

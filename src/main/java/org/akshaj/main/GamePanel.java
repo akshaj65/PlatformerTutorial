@@ -2,19 +2,11 @@ package org.akshaj.main;
 
 import org.akshaj.inputs.KeyBoardInputs;
 import org.akshaj.inputs.MouseInputs;
-import org.akshaj.utils.Constants.*;
-
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.io.InputStream;
-import java.security.PublicKey;
 
 import static org.akshaj.main.Game.GAME_WIDTH;
 import static org.akshaj.main.Game.GAME_HEIGHT;
-import static org.akshaj.utils.Constants.PlayerConstants.*;
 
 public class GamePanel extends JPanel {
 

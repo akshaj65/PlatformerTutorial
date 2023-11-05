@@ -1,7 +1,9 @@
 package org.akshaj.main;
 
 import org.akshaj.entities.Player;
-import org.akshaj.levels.LevelManager;
+import org.akshaj.gamestates.Gamestate;
+import org.akshaj.gamestates.Playing;
+import org.akshaj.gamestates.Menu;
 
 import java.awt.*;
 
@@ -22,8 +24,9 @@ public class Game implements Runnable{
     private final int FPS_SET=120;
     private final int UPS_SET=200;
 
-    private Player player;
-    private LevelManager levelManager;
+
+    private Playing playing;
+    private Menu menu;
 
 
     public Game(){
@@ -35,9 +38,8 @@ public class Game implements Runnable{
     }
 
     private void initClasses() {
-        levelManager= new LevelManager(this);
-        player=new Player(200,200,(int)(64*SCALE),(int)(40*SCALE));
-        player.loadLevelData(levelManager.getCurrentLevel().getLvlData());
+        menu= new Menu(this);
+        playing= new Playing(this);
     }
 
     public void startGameLoop(){
@@ -46,13 +48,29 @@ public class Game implements Runnable{
     }
 
     public void update(){
-       player.update();
-       levelManager.update();
+        switch (Gamestate.state){
+
+            case PLAYING -> {
+               playing.update();
+            }
+            case MENU -> {
+                menu.update();
+            }
+        }
+
     }
 
     public  void render(Graphics g){
-        levelManager.draw(g);  //when this is called first level data is drawn first
-        player.render(g);  //above level player is drawn
+        switch (Gamestate.state){
+            case MENU -> {
+                menu.draw(g);
+            }
+            case PLAYING -> {
+                playing.draw(g);
+
+            }
+        }
+
 
     }
 
@@ -101,9 +119,16 @@ public class Game implements Runnable{
          }
     }
     public  void windowsFocusLost(){
-        player.resetDirBooleans();
+        if (Gamestate.state == Gamestate.PLAYING){
+                playing.getPlayer().resetDirBooleans();
+        }
     }
-    public Player getPlayer(){
-        return player;
+
+    public Menu getMenu(){
+        return menu;
+    }
+
+    public Playing getPlaying(){
+        return playing;
     }
 }
