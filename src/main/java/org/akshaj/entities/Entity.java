@@ -18,10 +18,10 @@ public abstract class Entity {
     }
     protected  void drawHitbox(Graphics g){
         //for debugging hitbox
-        //   g.setColor(Color.green);
-        //   g.drawRect((int) hitbox.x,(int) hitbox.y,(int) hitbox.width,(int) hitbox.height);
+//           g.setColor(Color.green);
+//           g.drawRect((int) hitbox.x,(int) hitbox.y,(int) hitbox.width,(int) hitbox.height);
     }
-    protected void initHitbox(float x, float y,float width,float height) {
+    protected void initHitbox(float x, float y,int width,int height) {  //bug fix(scale=1.5): change width and height to int
         hitbox=new Rectangle2D.Float((int) x,(int) y,width,height);
     }
 

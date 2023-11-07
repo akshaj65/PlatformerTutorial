@@ -20,7 +20,8 @@ public class Playing  extends State implements IStatemethods{
 
     private void initClasses() {
         levelManager= new LevelManager(game);
-        player=new Player(200,200,(int)(64*Game.SCALE),(int)(40*Game.SCALE));
+        //BugFix3: (previously x nd y are 200)  x and y dependent to SCALE
+        player=new Player((int)(70*Game.SCALE),(int)(200*Game.SCALE),(int)(64*Game.SCALE),(int)(40*Game.SCALE));
         player.loadLevelData(levelManager.getCurrentLevel().getLvlData());
     }
 
@@ -51,6 +52,11 @@ public class Playing  extends State implements IStatemethods{
 
     @Override
     public void mouseReleased(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseMoved(MouseEvent e) {
 
     }
 

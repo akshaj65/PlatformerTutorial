@@ -14,7 +14,7 @@ public class Player extends Entity{
     private int aniTick, aniIndex,aniSpeed=15;
     private int playerAction=IDLE;
     private boolean left,right,up,down;
-    private float playerSpeed =2.0f;
+    private float playerSpeed =1.1f * Game.SCALE; //BugFix2: (previously 2.0f) player speed should be dependent to scale
     private boolean moving=false,attacking=false;
     private int[][] lvlData;
     private float xDrawOffset = 21 * Game.SCALE;  //21 and 4 are the points of the top left edge of the player sprite
@@ -32,7 +32,7 @@ public class Player extends Entity{
     public Player(float x,float y,int width,int height){
         super(x,y,width,height);
         loadAnimations();
-        initHitbox(x,y,20 * Game.SCALE,27 * Game.SCALE); // height 28-1 as want no gap b/w floor and player
+        initHitbox(x,y,(int)(20 * Game.SCALE),(int)(27 * Game.SCALE)); ////bug fix(scale=1.5): when scale 1.5 *27 (40.5)
     }
 
     public void update(){
@@ -75,9 +75,9 @@ public class Player extends Entity{
                   airSpeed=fallSpeedAfterCollision;
               updateXPos(xSpeed);
             }
-        }else //if not in air
+        }else { //if not in air
             updateXPos(xSpeed);
-
+        }
         moving=true;
 
     }

@@ -14,7 +14,7 @@ public class Game implements Runnable{
     private Thread gameThread;
 
     public final static int  TILES_DEFAULT_SIZE =32;
-    public final static float SCALE =2f; //2.4f control this u get different window size
+    public final static float SCALE =1.5f; //bug fix(scale=1.5): when 1.5 there is a bug in animation issue was in player nd Entity class
     public final static int TILES_IN_WIDTH = 26;
     public final static int TILES_IN_HEIGHT = 14;
     public final static int TILES_SIZE = (int)(TILES_DEFAULT_SIZE * SCALE) ;
@@ -55,6 +55,9 @@ public class Game implements Runnable{
             }
             case MENU -> {
                 menu.update();
+            }
+            case QUIT,OPTIONS -> {
+                System.exit(0);
             }
         }
 

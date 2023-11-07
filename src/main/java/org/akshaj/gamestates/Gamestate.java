@@ -1,7 +1,7 @@
 package org.akshaj.gamestates;
 
 public enum Gamestate {
-    PLAYING,MENU;
+    PLAYING,MENU,OPTIONS,QUIT;
 
-    public static Gamestate state = MENU;
+    public static Gamestate state = PLAYING;
 }
